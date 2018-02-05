@@ -68,12 +68,11 @@ public class DaneWejscia {
 		this.system = wezDane(true);
 	}
 
-	public void wynik(int liczba, int system) {
-	
-			System.out.println("Liczba: " + liczba + " w systemie liczbowym " + system + " wynosi:"
-					+ oblicz(liczba, system));
+	public static String wynik(int liczba, int system) {
 		
-
+		
+		return oblicz(liczba, system);
+		
 	}
 
 	private static String oblicz(int x, int system) {
