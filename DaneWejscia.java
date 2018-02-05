@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class DaneWejscia {
 
 	private int liczba;
-	private int system;
+	private int systemLiczbowy;
 
 	private int sprawdzPoprawnosc(int x, boolean system) {
 
@@ -22,21 +22,14 @@ public class DaneWejscia {
 		}
 		return x;
 	}
+	
 
-	private void napis(boolean system) {
-		if (system == true) {
-			System.out.println("Podaj system liczbowy 2 - 16:");
-		} else {
-			System.out.println("Podaj dodatni¹ liczbê ca³kowit¹:");
-		}
-	}
-
-	private int wezDane(boolean system) {
+	private int wezDane(boolean czyWprowadzaSystem) {
 		Scanner input = new Scanner(System.in);
 		String x;
 		int output = 0;
 		while (output == 0) {
-			napis(system);
+			System.out.println(czyWprowadzaSystem? "Podaj system liczbowy 2 - 16:":"Podaj dodatni¹ liczbê ca³kowit¹:");
 			x = input.nextLine();
 			if (Objects.equals(x, new String("exit"))) {
 				System.out.println("Zakoñczono");
@@ -47,7 +40,7 @@ public class DaneWejscia {
 				} catch (Exception e) {
 					System.out.println("B³êdna wartoœæ");
 				}
-				output = sprawdzPoprawnosc(output, system);
+				output = sprawdzPoprawnosc(output, czyWprowadzaSystem);
 			}
 		}
 		return output;
@@ -57,36 +50,36 @@ public class DaneWejscia {
 		return liczba;
 	}
 
-	public int getSystem() {
-		return system;
+	public int getSystemLiczbowy() {
+		return systemLiczbowy;
 	}
 
 	public void pobierzDane() {
 
 		this.liczba = wezDane(false);
 
-		this.system = wezDane(true);
+		this.systemLiczbowy = wezDane(true);
 	}
 
-	public void wynik(int liczba, int system) {
+	public void wynik(int liczba, int systemLiczbowy) {
 	
-			System.out.println("Liczba: " + liczba + " w systemie liczbowym " + system + " wynosi:"
-					+ oblicz(liczba, system));
+			System.out.println("Liczba: " + liczba + " w systemie liczbowym " + systemLiczbowy + " wynosi:"
+					+ oblicz(liczba, systemLiczbowy));
 		
 
 	}
 
-	private static String oblicz(int x, int system) {
+	private static String oblicz(int x, int systemLiczbowy) {
 		String wynik = "";
 		String literka = "";
 
 		if (x != 0) {
-			if (x % system >= 10) {
-				literka = zamianaCyfry(x % system);
+			if (x % systemLiczbowy >= 10) {
+				literka = zamianaCyfry(x % systemLiczbowy);
 			} else {
-				literka = "" + x % system;
+				literka = "" + x % systemLiczbowy;
 			}
-			wynik = (oblicz(x / system, system) + literka);
+			wynik = (oblicz(x / systemLiczbowy, systemLiczbowy) + literka);
 		}
 		return wynik;
 
